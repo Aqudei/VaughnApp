@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 using VaughnApp.ViewModels;
 
 namespace VaughnApp.Views
@@ -25,13 +26,20 @@ namespace VaughnApp.Views
         {
             InitializeComponent();
 
-            Unloaded += Arduino_Unloaded;
+            Loaded += Arduino_Loaded;
+
+            
         }
 
-        private void Arduino_Unloaded(object sender, RoutedEventArgs e)
+        private void Arduino_Loaded(object sender, RoutedEventArgs e)
         {
-            var vm = DataContext as ArduinoViewModel;
-            vm?.CleanUp();
+            var window = Window.GetWindow(this);
+            if (window != null)
+                window.Closing += (s, args) =>
+                {
+                    var vm = DataContext as ArduinoViewModel;
+                    vm?.CleanUp();
+                };
         }
     }
 }

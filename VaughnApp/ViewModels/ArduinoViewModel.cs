@@ -18,6 +18,7 @@ using System.Windows.Threading;
 using MahApps.Metro.Controls;
 using Prism;
 using Prism.Commands;
+using Prism.Regions;
 
 namespace VaughnApp.ViewModels
 {
@@ -29,6 +30,7 @@ namespace VaughnApp.ViewModels
         public ObservableCollection<Port> Ports { get; set; } = new ObservableCollection<Port>();
         private DelegateCommand<string> _sendCommand;
         private TimeSpan _playTime;
+        private VideoCaptureDevice _videoSource;
 
         public TimeSpan PlayTime
         {
@@ -64,12 +66,12 @@ namespace VaughnApp.ViewModels
             if (videoDevices.Count <= 0)
                 return;
 
-            var videoSource = new VideoCaptureDevice(
+            _videoSource = new VideoCaptureDevice(
                 videoDevices[0].MonikerString);
             // set NewFrame event handler
-            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+            _videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
             // start the video source
-            videoSource.Start();
+            _videoSource.Start();
 
 
             // signal to stop
@@ -143,6 +145,11 @@ namespace VaughnApp.ViewModels
             if (_serialPort.IsOpen)
             {
                 _serialPort.Close();
+            }
+
+            if (_videoSource != null && _videoSource.IsRunning)
+            {
+                _videoSource.SignalToStop();
             }
         }
     }
