@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ico="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:VaughnApp.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -29,16 +30,39 @@
             </Border>
 
         </Grid>
-
-        <StackPanel Orientation="Vertical" Grid.Column="1">
+        <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top">
             <ComboBox ItemsSource="{Binding Ports}" 
                       SelectedItem ="{Binding SelectedPort}"
                       Margin="5,5,5,5"/>
-            <Button Content="Play" 
-                    Command="{Binding SendCommand}"
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                <Button Command="{Binding SendCommand}"
+                    Width="60"
+                    Height="60"
                     CommandParameter="R"
-                    Margin="5,5,5,5"/>
-            <Button Content="Pause" Margin="5,5,5,5"/>
+                    Style="{DynamicResource MahApps.Styles.Button.Circle}"
+                    Margin="5,5,5,5" Content="{ico:Material Play, Height=20, Width=20}"/>
+                <Button Command="{Binding SendCommand}"
+                        Width="60"
+                        Height="60"
+                        CommandParameter="R"
+                        Style="{DynamicResource MahApps.Styles.Button.Circle}"
+                        Margin="5,5,5,5" Content="{ico:Material Pause, Height=20, Width=20}"/>
+                <Button Command="{Binding SendCommand}"
+                        Width="60"
+                        Height="60"
+                        CommandParameter="R"
+                        Style="{DynamicResource MahApps.Styles.Button.Circle}"
+                        Margin="5,5,5,5" Content="{ico:Material SkipNext, Height=20, Width=20}"/>
+                <Button Command="{Binding SendCommand}"
+                        Width="60"
+                        Height="60"
+                        CommandParameter="R"
+                        Style="{DynamicResource MahApps.Styles.Button.Circle}"
+                        Margin="5,5,5,5" Content="{ico:Material SkipPrevious, Height=20, Width=20}"/>
+            </StackPanel>
+
+
         </StackPanel>
 
 

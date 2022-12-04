@@ -40,7 +40,7 @@ namespace VaughnApp.ViewModels
 
         private void Play(string p)
         {
-            _serialPort.Write(p);
+            //_serialPort.Write(p);
         }
 
         public Port SelectedPort
@@ -98,7 +98,7 @@ namespace VaughnApp.ViewModels
 
         private void InitSerialPort()
         {
-            PropertyChanged += ArduinoViewModel_PropertyChanged;
+
             using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Caption like '%(COM%'"))
             {
                 var portNames = SerialPort.GetPortNames();
@@ -117,7 +117,7 @@ namespace VaughnApp.ViewModels
                 }
 
                 SelectedPort = Ports.FirstOrDefault();
-
+                PropertyChanged += ArduinoViewModel_PropertyChanged;
             }
         }
 
