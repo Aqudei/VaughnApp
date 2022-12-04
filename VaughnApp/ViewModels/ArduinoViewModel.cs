@@ -133,7 +133,7 @@ namespace VaughnApp.ViewModels
 
                 _serialPort.PortName = SelectedPort.PortName;
                 _serialPort.Open();
-
+                PlayTime = TimeSpan.FromTicks(0);
             }
         }
 
